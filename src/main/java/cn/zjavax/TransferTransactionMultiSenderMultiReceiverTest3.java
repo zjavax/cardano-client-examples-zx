@@ -20,6 +20,13 @@ import static com.bloxbean.cardano.client.function.helper.InputBuilders.createFr
 import static com.bloxbean.cardano.client.function.helper.SignerProviders.signerFrom;
 
 // 两个发送者，一个接收者
+// 和我想象的不一样：https://developers.cardano.org/docs/integrate-cardano/multi-witness-transactions-cli
+//      cardano-cli transaction build-raw \
+//        --tx-in b73b7503576412219241731230b5b7dd3b64eed62ccfc3ce69eb86822f1db251#0 \
+//        --tx-in b73b7503576412219241731230b5b7dd3b64eed62ccfc3ce69eb86822f1db251#1 \
+//        --tx-out $(cat ../keys/store-owner.addr)+999646250 \
+//        --fee 179581 \
+//        --out-file tx2.draft
 public class TransferTransactionMultiSenderMultiReceiverTest3 extends BaseTest {
     public static void main(String[] args) throws AddressExcepion, CborSerializationException, ApiException {
         new TransferTransactionMultiSenderMultiReceiverTest3().transfer();
@@ -35,13 +42,16 @@ public class TransferTransactionMultiSenderMultiReceiverTest3 extends BaseTest {
         Account sender2 = new Account(Networks.testnet(), sender2Mnemonic);
         String sender2Address = sender2.baseAddress();
 
-        String receiverAddress1 = "addr_test1qqwpl7h3g84mhr36wpetk904p7fchx2vst0z696lxk8ujsjyruqwmlsm344gfux3nsj6njyzj3ppvrqtt36cp9xyydzqzumz82";
+        String receiverAddress1 = "addr_test1qp6vl670t6t5wntm38yx94lw0nlj9mamqvk5zvaphpxtmnfa0zp6xfaqxlxwqve2tkvq5q6xmgrmuxy8fd0c92cm80pqpjtpwq";
 
         Output output1 = Output.builder()
                 .address(receiverAddress1)
                 .assetName(LOVELACE)
-                .qty(adaToLovelace(5.1))
+                .qty(adaToLovelace(4))
                 .build();
+
+
+
 
         TxBuilder txBuilder = (output1.outputBuilder()
                 .buildInputs(createFromSender(senderAddress, senderAddress))
