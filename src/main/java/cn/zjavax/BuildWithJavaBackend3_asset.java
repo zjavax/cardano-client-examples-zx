@@ -78,9 +78,9 @@ public class BuildWithJavaBackend3_asset extends BaseTest {
                 .andThen(feeCalculator(senderAddress, 1))
                 .andThen(adjustChangeOutput(senderAddress, 1));
 
-        Transaction signedTransaction = TxBuilderContext.init(utxoSupplier, protocolParamsSupplier).build(txBuilder);
+        Transaction unsignTransaction = TxBuilderContext.init(utxoSupplier, protocolParamsSupplier).build(txBuilder);
 
-        System.out.println("txHexDraft=\"" +signedTransaction.serializeToHex()+"\"");
+        System.out.println("txHexDraft=\"" +unsignTransaction.serializeToHex()+"\"");
 
     }
 
@@ -97,7 +97,7 @@ class TransferAsset {
     String policyId; // ada的policyId为null
     String assetName; // ada: "lovelace"
     double amount;
-    Long decimals;  // 前台可以传，也可以不传
+    Long decimals;  // 前台可以传，也可以不传，不传为null
 
     public String getReceiverAddress() {
         return receiverAddress;
