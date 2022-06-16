@@ -21,6 +21,8 @@ import com.bloxbean.cardano.client.transaction.spec.TransactionOutput;
 import com.bloxbean.cardano.client.util.AssetUtil;
 import com.bloxbean.cardano.client.util.JsonUtil;
 import com.bloxbean.cardano.client.util.Tuple;
+import io.blockfrost.sdk.impl.AccountServiceImpl;
+import io.blockfrost.sdk.impl.AssetServiceImpl;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -47,10 +49,13 @@ public class BaseTest {
     protected UtxoSupplier utxoSupplier;
     protected ProtocolParamsSupplier protocolParamsSupplier;
 
+    protected AccountServiceImpl accountService   ;
+
     public BaseTest() {
         backendService =
                 new BFBackendService(Constants.BLOCKFROST_TESTNET_URL, Constant.BF_PROJECT_KEY);
 //                new KoiosBackendService(KOIOS_TESTNET_URL);
+        accountService  = new AccountServiceImpl(Constants.BLOCKFROST_TESTNET_URL, Constant.BF_PROJECT_KEY);
 
         feeCalculationService = backendService.getFeeCalculationService();
         transactionHelperService = backendService.getTransactionHelperService();
@@ -63,6 +68,7 @@ public class BaseTest {
         utxoTransactionBuilder = backendService.getUtxoTransactionBuilder();
         utxoSupplier = new DefaultUtxoSupplier(backendService.getUtxoService());
         protocolParamsSupplier = new DefaultProtocolParamsSupplier(epochService);
+
     }
 
     protected long getTtl() throws ApiException {

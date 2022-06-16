@@ -32,6 +32,11 @@
             <version>0.2.0-beta3</version>
         </dependency>
         <dependency>
+            <groupId>io.blockfrost</groupId>
+            <artifactId>blockfrost-java</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
             <groupId>com.bloxbean.cardano</groupId>
             <artifactId>cardano-client-backend-blockfrost</artifactId>
             <version>0.2.0-beta3</version>
